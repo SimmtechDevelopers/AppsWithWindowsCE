@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="Simmtech.User" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="ErpProductUserDbProvider" targetNamespace="Simmtech.User" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IUserMembershipProvider_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="60000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IUserRoleProvider_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="60000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="Simmtech.User" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="Simmtech.BusinessModel" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:element name="ChangePassword">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="oldPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="newPassword" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ChangePasswordResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ChangePasswordResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="UserProviderFault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Action" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserProviderFault" nillable="true" type="tns:UserProviderFault" />
+      <xs:element name="ValidateUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ValidateUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ValidateUserResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetUserResult" nillable="true" type="tns:UserProfile" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="UserProfile">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:UserBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="SelectedOrganization" nillable="true" type="tns:Oraganization" />
+              <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="UserProfile" nillable="true" type="tns:UserProfile" />
+      <xs:complexType name="UserBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:long" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
+          <xs:element xmlns:q1="Simmtech.BusinessModel" minOccurs="0" name="Type" type="q1:UserType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserBase" nillable="true" type="tns:UserBase" />
+      <xs:complexType name="MembershipUser">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:UserBase">
+            <xs:sequence>
+              <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Properties" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+              <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Roles" nillable="true" type="q3:ArrayOfstring" />
+              <xs:element minOccurs="0" name="Validate" nillable="true" type="tns:UserValidation" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="MembershipUser" nillable="true" type="tns:MembershipUser" />
+      <xs:complexType name="UserValidation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Expired" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IsLocked" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsModified" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PasswordExpired" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserValidation" nillable="true" type="tns:UserValidation" />
+      <xs:complexType name="Oraganization">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:Organization">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Oraganization" nillable="true" type="tns:Oraganization" />
+      <xs:complexType name="Organization">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="OperatingUnitId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Organization" nillable="true" type="tns:Organization" />
+      <xs:element name="GetOrganizations">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetOrganizationsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetOrganizationsResult" nillable="true" type="tns:ArrayOfOraganization" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfOraganization">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Oraganization" nillable="true" type="tns:Oraganization" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfOraganization" nillable="true" type="tns:ArrayOfOraganization" />
+      <xs:element name="AddUsersToRoles">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="usernames" nillable="true" type="q4:ArrayOfstring" />
+            <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="roleNames" nillable="true" type="q5:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddUsersToRolesResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRolesForUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRolesForUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetRolesForUserResult" nillable="true" type="q6:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="Simmtech.BusinessModel" elementFormDefault="qualified" targetNamespace="Simmtech.BusinessModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:simpleType name="UserType">
+        <xs:list>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="None">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Employee">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Account">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="All">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+      <xs:element name="UserType" nillable="true" type="tns:UserType" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfKeyValueOfstringstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Key" nillable="true" type="xs:string" />
+                <xs:element name="Value" nillable="true" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IUserMembershipProvider_ChangePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_ChangePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_ChangePassword_UserProviderFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:UserProviderFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_ValidateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_ValidateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_ValidateUser_UserProviderFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:UserProviderFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_GetUser_UserProviderFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:UserProviderFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_GetOrganizations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizations" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_GetOrganizations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserMembershipProvider_GetOrganizations_UserProviderFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:UserProviderFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserRoleProvider_AddUsersToRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUsersToRoles" />
+  </wsdl:message>
+  <wsdl:message name="IUserRoleProvider_AddUsersToRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUsersToRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRoleProvider_AddUsersToRoles_UserProviderFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:UserProviderFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserRoleProvider_GetRolesForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRolesForUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserRoleProvider_GetRolesForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRolesForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRoleProvider_GetRolesForUser_UserProviderFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:UserProviderFault" />
+  </wsdl:message>
+  <wsdl:portType name="IUserMembershipProvider">
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input wsaw:Action="Simmtech.User/IUserMembershipProvider/ChangePassword" message="tns:IUserMembershipProvider_ChangePassword_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.User/IUserMembershipProvider/ChangePasswordResponse" message="tns:IUserMembershipProvider_ChangePassword_OutputMessage" />
+      <wsdl:fault wsaw:Action="Simmtech.User/IUserMembershipProvider/ChangePasswordUserProviderFaultFault" name="UserProviderFaultFault" message="tns:IUserMembershipProvider_ChangePassword_UserProviderFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <wsdl:input wsaw:Action="Simmtech.User/IUserMembershipProvider/ValidateUser" message="tns:IUserMembershipProvider_ValidateUser_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.User/IUserMembershipProvider/ValidateUserResponse" message="tns:IUserMembershipProvider_ValidateUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="Simmtech.User/IUserMembershipProvider/ValidateUserUserProviderFaultFault" name="UserProviderFaultFault" message="tns:IUserMembershipProvider_ValidateUser_UserProviderFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="Simmtech.User/IUserMembershipProvider/GetUser" message="tns:IUserMembershipProvider_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.User/IUserMembershipProvider/GetUserResponse" message="tns:IUserMembershipProvider_GetUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="Simmtech.User/IUserMembershipProvider/GetUserUserProviderFaultFault" name="UserProviderFaultFault" message="tns:IUserMembershipProvider_GetUser_UserProviderFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizations">
+      <wsdl:input wsaw:Action="Simmtech.User/IUserMembershipProvider/GetOrganizations" message="tns:IUserMembershipProvider_GetOrganizations_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.User/IUserMembershipProvider/GetOrganizationsResponse" message="tns:IUserMembershipProvider_GetOrganizations_OutputMessage" />
+      <wsdl:fault wsaw:Action="Simmtech.User/IUserMembershipProvider/GetOrganizationsUserProviderFaultFault" name="UserProviderFaultFault" message="tns:IUserMembershipProvider_GetOrganizations_UserProviderFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IUserRoleProvider">
+    <wsdl:operation name="AddUsersToRoles">
+      <wsdl:input wsaw:Action="Simmtech.User/IUserRoleProvider/AddUsersToRoles" message="tns:IUserRoleProvider_AddUsersToRoles_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.User/IUserRoleProvider/AddUsersToRolesResponse" message="tns:IUserRoleProvider_AddUsersToRoles_OutputMessage" />
+      <wsdl:fault wsaw:Action="Simmtech.User/IUserRoleProvider/AddUsersToRolesUserProviderFaultFault" name="UserProviderFaultFault" message="tns:IUserRoleProvider_AddUsersToRoles_UserProviderFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRolesForUser">
+      <wsdl:input wsaw:Action="Simmtech.User/IUserRoleProvider/GetRolesForUser" message="tns:IUserRoleProvider_GetRolesForUser_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.User/IUserRoleProvider/GetRolesForUserResponse" message="tns:IUserRoleProvider_GetRolesForUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="Simmtech.User/IUserRoleProvider/GetRolesForUserUserProviderFaultFault" name="UserProviderFaultFault" message="tns:IUserRoleProvider_GetRolesForUser_UserProviderFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IUserMembershipProvider" type="tns:IUserMembershipProvider">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUserMembershipProvider_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ChangePassword">
+      <soap12:operation soapAction="Simmtech.User/IUserMembershipProvider/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap12:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <soap12:operation soapAction="Simmtech.User/IUserMembershipProvider/ValidateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap12:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap12:operation soapAction="Simmtech.User/IUserMembershipProvider/GetUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap12:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizations">
+      <soap12:operation soapAction="Simmtech.User/IUserMembershipProvider/GetOrganizations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap12:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IUserRoleProvider" type="tns:IUserRoleProvider">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUserRoleProvider_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AddUsersToRoles">
+      <soap12:operation soapAction="Simmtech.User/IUserRoleProvider/AddUsersToRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap12:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolesForUser">
+      <soap12:operation soapAction="Simmtech.User/IUserRoleProvider/GetRolesForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap12:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IUserMembershipProvider" type="tns:IUserMembershipProvider">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="Simmtech.User/IUserMembershipProvider/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <soap:operation soapAction="Simmtech.User/IUserMembershipProvider/ValidateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="Simmtech.User/IUserMembershipProvider/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizations">
+      <soap:operation soapAction="Simmtech.User/IUserMembershipProvider/GetOrganizations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IUserRoleProvider" type="tns:IUserRoleProvider">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddUsersToRoles">
+      <soap:operation soapAction="Simmtech.User/IUserRoleProvider/AddUsersToRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolesForUser">
+      <soap:operation soapAction="Simmtech.User/IUserRoleProvider/GetRolesForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserProviderFaultFault">
+        <soap:fault use="literal" name="UserProviderFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ErpProductUserDbProvider">
+    <wsdl:port name="NetTcpBinding_IUserMembershipProvider" binding="tns:NetTcpBinding_IUserMembershipProvider">
+      <soap12:address location="net.tcp://localhost:8510/Simmtech/User/Membership" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8510/Simmtech/User/Membership</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IUserRoleProvider" binding="tns:NetTcpBinding_IUserRoleProvider">
+      <soap12:address location="net.tcp://localhost:8510/Simmtech/User/Role" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8510/Simmtech/User/Role</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IUserMembershipProvider" binding="tns:BasicHttpBinding_IUserMembershipProvider">
+      <soap:address location="http://localhost:8519/Simmtech/User/Membership" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IUserRoleProvider" binding="tns:BasicHttpBinding_IUserRoleProvider">
+      <soap:address location="http://localhost:8519/Simmtech/User/Role" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

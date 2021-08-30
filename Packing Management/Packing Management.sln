@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackingManagement", "PackingManagement\PackingManagement.csproj", "{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}"
+EndProject
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "PackingManagementDeploy", "PackingManagementDeploy\PackingManagementDeploy.vddproj", "{E802293F-9E5C-4F4E-8BB9-CD5397BF28C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC68C7A-C030-4A93-8CAF-B3DFCC4D72F1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E802293F-9E5C-4F4E-8BB9-CD5397BF28C7}.Debug|Any CPU.ActiveCfg = Debug
+		{E802293F-9E5C-4F4E-8BB9-CD5397BF28C7}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

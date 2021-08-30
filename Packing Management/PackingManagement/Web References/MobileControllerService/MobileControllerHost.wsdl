@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="Simmtech.BusinessService" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="MobileControllerHost" targetNamespace="Simmtech.BusinessService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="Simmtech.BusinessService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="Simmtech.BusinessModel" />
+      <xs:import namespace="Simmtech.User" />
+      <xs:element name="GetPacking">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="Simmtech.BusinessModel" minOccurs="0" name="packId" nillable="true" type="q1:PackingBase" />
+            <xs:element xmlns:q2="Simmtech.BusinessModel" minOccurs="0" name="isPacked" type="q2:PackingStatus" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPackingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="Simmtech.BusinessModel" minOccurs="0" name="GetPackingResult" nillable="true" type="q3:Packing" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPackedListDetail">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="Simmtech.BusinessModel" minOccurs="0" name="packId" nillable="true" type="q4:PackingBase" />
+            <xs:element xmlns:q5="Simmtech.BusinessModel" minOccurs="0" name="isPacked" type="q5:PackingStatus" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPackedListDetailResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="Simmtech.BusinessModel" minOccurs="0" name="GetPackedListDetailResult" nillable="true" type="q6:PackingCollection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPackedJobDetail">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="Simmtech.BusinessModel" minOccurs="0" name="packId" nillable="true" type="q7:PackingBase" />
+            <xs:element xmlns:q8="Simmtech.BusinessModel" minOccurs="0" name="isPacked" type="q8:PackingStatus" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPackedJobDetailResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="Simmtech.BusinessModel" minOccurs="0" name="GetPackedJobDetailResult" nillable="true" type="q9:PackedJobCollection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApprovePackedList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="Simmtech.BusinessModel" minOccurs="0" name="packedId" nillable="true" type="q10:ArrayOfPackingBase" />
+            <xs:element xmlns:q11="Simmtech.User" minOccurs="0" name="user" nillable="true" type="q11:UserProfile" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApprovePackedListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ApprovePackedListResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MoveInventory">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q12="Simmtech.BusinessModel" minOccurs="0" name="packedId" nillable="true" type="q12:ArrayOfPackingBase" />
+            <xs:element xmlns:q13="Simmtech.BusinessModel" minOccurs="0" name="inventoryId" nillable="true" type="q13:InventoryBase" />
+            <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="isForce" type="xs:boolean" />
+            <xs:element xmlns:q14="Simmtech.User" minOccurs="0" name="user" nillable="true" type="q14:UserProfile" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MoveInventoryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="MoveInventoryResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetInventory">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q15="Simmtech.User" minOccurs="0" name="organizationId" nillable="true" type="q15:Oraganization" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetInventoryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q16="Simmtech.BusinessModel" minOccurs="0" name="GetInventoryResult" nillable="true" type="q16:InventoryCollection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TransferOrgInventory">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q17="Simmtech.BusinessModel" minOccurs="0" name="packedId" nillable="true" type="q17:ArrayOfPackingBase" />
+            <xs:element xmlns:q18="Simmtech.User" minOccurs="0" name="user" nillable="true" type="q18:UserProfile" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TransferOrgInventoryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="TransferOrgInventoryResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ValidateOnHandPacking">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q19="Simmtech.BusinessModel" minOccurs="0" name="pack" nillable="true" type="q19:PackingBase" />
+            <xs:element xmlns:q20="Simmtech.User" minOccurs="0" name="user" nillable="true" type="q20:UserProfile" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ValidateOnHandPackingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ValidateOnHandPackingResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetInventoryPackingList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q21="Simmtech.BusinessModel" minOccurs="0" name="inventory" nillable="true" type="q21:CommonCode" />
+            <xs:element xmlns:q22="Simmtech.User" minOccurs="0" name="user" nillable="true" type="q22:UserProfile" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetInventoryPackingListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q23="Simmtech.BusinessModel" minOccurs="0" name="GetInventoryPackingListResult" nillable="true" type="q23:ArrayOfPacking" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetShipment">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q24="Simmtech.BusinessModel" minOccurs="0" name="shipment" nillable="true" type="q24:ShipmentBase" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetShipmentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q25="Simmtech.BusinessModel" minOccurs="0" name="GetShipmentResult" nillable="true" type="q25:ShipmentCollection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetShipmentPacking">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q26="Simmtech.BusinessModel" minOccurs="0" name="shipment" nillable="true" type="q26:ShipmentBase" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetShipmentPackingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q27="Simmtech.BusinessModel" minOccurs="0" name="GetShipmentPackingResult" nillable="true" type="q27:PackingCollection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetShipmentIdForName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="shipmentNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetShipmentIdForNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetShipmentIdForNameResult" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetJobWithShipment">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q28="Simmtech.BusinessModel" minOccurs="0" name="job" nillable="true" type="q28:CommonCode" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetJobWithShipmentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q29="Simmtech.BusinessModel" minOccurs="0" name="GetJobWithShipmentResult" nillable="true" type="q29:SimpleJobCollection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="Simmtech.BusinessModel" elementFormDefault="qualified" targetNamespace="Simmtech.BusinessModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="PackingBase">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q1:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Id" type="xs:long" />
+              <xs:element minOccurs="0" name="IdType" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+              <xs:element minOccurs="0" name="ParentId" type="xs:long" />
+              <xs:element minOccurs="0" name="ParentIdType" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="PackingBase" nillable="true" type="tns:PackingBase" />
+      <xs:complexType name="Packing">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:PackingBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="InventoryName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="IsApproved" type="xs:boolean" />
+              <xs:element minOccurs="0" name="Items" nillable="true" type="xs:anyType" />
+              <xs:element minOccurs="0" name="LocationId" nillable="true" type="xs:decimal" />
+              <xs:element minOccurs="0" name="LocationName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="PackingDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="PackingNumber" type="xs:int" />
+              <xs:element minOccurs="0" name="PackingType" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Quantity" type="xs:long" />
+              <xs:element minOccurs="0" name="Weight" type="xs:decimal" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Packing" nillable="true" type="tns:Packing" />
+      <xs:complexType name="QuantityGrade">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q2:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Display" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Grade" type="xs:int" />
+              <xs:element minOccurs="0" name="JobId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+              <xs:element minOccurs="0" name="PackingId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="PackingIdType" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Pcs4Array" type="xs:int" />
+              <xs:element minOccurs="0" name="Quantity" type="xs:long" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="QuantityGrade" nillable="true" type="tns:QuantityGrade" />
+      <xs:complexType name="PackingCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Packing" nillable="true" type="tns:Packing" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PackingCollection" nillable="true" type="tns:PackingCollection" />
+      <xs:simpleType name="PackingStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="All" />
+          <xs:enumeration value="Packed" />
+          <xs:enumeration value="Unpacked" />
+          <xs:enumeration value="Approved" />
+          <xs:enumeration value="Unapproved" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="PackingStatus" nillable="true" type="tns:PackingStatus" />
+      <xs:complexType name="PackedJobCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PackedJob" nillable="true" type="tns:PackedJob" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PackedJobCollection" nillable="true" type="tns:PackedJobCollection" />
+      <xs:complexType name="PackedJob">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q3:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ArrayQuantity" type="xs:long" />
+              <xs:element minOccurs="0" name="CardNo" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="DateCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ExpiryDate" nillable="true" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="Grade" type="xs:int" />
+              <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="JobId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="JobNo" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ManufacturedDate" nillable="true" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="ManufacturedType" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+              <xs:element minOccurs="0" name="PackingId" type="xs:long" />
+              <xs:element minOccurs="0" name="PackingIdType" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="PackingNumber" type="xs:int" />
+              <xs:element minOccurs="0" name="Pcs4Array" type="xs:int" />
+              <xs:element minOccurs="0" name="Quantity" type="xs:long" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="PackedJob" nillable="true" type="tns:PackedJob" />
+      <xs:complexType name="ArrayOfPackingBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PackingBase" nillable="true" type="tns:PackingBase" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPackingBase" nillable="true" type="tns:ArrayOfPackingBase" />
+      <xs:simpleType name="UserType">
+        <xs:list>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="None">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Employee">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Account">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="All">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+      <xs:element name="UserType" nillable="true" type="tns:UserType" />
+      <xs:complexType name="InventoryBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="LocationId" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Organization" type="xs:int" />
+          <xs:element minOccurs="0" name="Subinventory" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="InventoryBase" nillable="true" type="tns:InventoryBase" />
+      <xs:complexType name="Inventory">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:InventoryBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Inventory" nillable="true" type="tns:Inventory" />
+      <xs:complexType name="InventoryCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Inventory" nillable="true" type="tns:Inventory" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="InventoryCollection" nillable="true" type="tns:InventoryCollection" />
+      <xs:complexType name="CommonCode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Childs" nillable="true" type="xs:anyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="CommonCodeCollection" Namespace="Simmtech.BusinessModel" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CommonCode" nillable="true" type="tns:CommonCode" />
+      <xs:complexType name="CommonCodeCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="CommonCode" nillable="true" type="tns:CommonCode" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CommonCodeCollection" nillable="true" type="tns:CommonCodeCollection" />
+      <xs:complexType name="HierarchyCommonCode">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:CommonCode">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Childs" nillable="true" type="xs:anyType">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <ActualType Name="HierarchyCommonCodeCollection" Namespace="Simmtech.BusinessModel" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="HierarchyCommonCode" nillable="true" type="tns:HierarchyCommonCode" />
+      <xs:complexType name="HierarchyCommonCodeCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="HierarchyCommonCode" nillable="true" type="tns:HierarchyCommonCode" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="HierarchyCommonCodeCollection" nillable="true" type="tns:HierarchyCommonCodeCollection" />
+      <xs:complexType name="ArrayOfPacking">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Packing" nillable="true" type="tns:Packing" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPacking" nillable="true" type="tns:ArrayOfPacking" />
+      <xs:complexType name="ShipmentBase">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q4:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Id" type="xs:long" />
+              <xs:element minOccurs="0" name="LocationId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="OperatingUnitId" type="xs:int" />
+              <xs:element minOccurs="0" name="ScheduleDate" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Status" type="tns:ShipmentStatus" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="ShipmentBase" nillable="true" type="tns:ShipmentBase" />
+      <xs:simpleType name="ShipmentStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ready">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Confirmed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">20</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LotChanged">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">30</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ShipmentStatus" nillable="true" type="tns:ShipmentStatus" />
+      <xs:complexType name="Shipment">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ShipmentBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Order" nillable="true" type="tns:SalesOrderCollection" />
+              <xs:element minOccurs="0" name="Packing" nillable="true" type="tns:PackingCollection" />
+              <xs:element minOccurs="0" name="ShipDate" nillable="true" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Shipment" nillable="true" type="tns:Shipment" />
+      <xs:complexType name="SalesOrderCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SalesOrder" nillable="true" type="tns:SalesOrder" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="SalesOrderCollection" nillable="true" type="tns:SalesOrderCollection" />
+      <xs:complexType name="SalesOrder">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:SalesOrderBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="CustomerPO" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ScheduleShipDate" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="SalesOrder" nillable="true" type="tns:SalesOrder" />
+      <xs:complexType name="SalesOrderBase">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q5:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="HeaderId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="LineId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="LineNo" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="OperatingUnitId" type="xs:int" />
+              <xs:element minOccurs="0" name="OrderNo" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Quantity" type="xs:long" />
+              <xs:element minOccurs="0" name="SiteId" type="xs:decimal" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="SalesOrderBase" nillable="true" type="tns:SalesOrderBase" />
+      <xs:complexType name="ShipmentCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Shipment" nillable="true" type="tns:Shipment" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ShipmentCollection" nillable="true" type="tns:ShipmentCollection" />
+      <xs:complexType name="SimpleJobCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SimpleJob" nillable="true" type="tns:SimpleJob" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="SimpleJobCollection" nillable="true" type="tns:SimpleJobCollection" />
+      <xs:complexType name="SimpleJob">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:JobBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemRevision" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ModelName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="PrimaryJobName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="SimpleJob" nillable="true" type="tns:SimpleJob" />
+      <xs:complexType name="JobBase">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q6:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Id" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="JobBase" nillable="true" type="tns:JobBase" />
+      <xs:complexType name="InventoryLot">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:JobBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Grade" type="xs:int" />
+              <xs:element minOccurs="0" name="Inventory" nillable="true" type="tns:InventoryBase" />
+              <xs:element minOccurs="0" name="LotNumber" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+              <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" minOccurs="0" name="Status" type="q7:InventoryStatus" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="InventoryLot" nillable="true" type="tns:InventoryLot" />
+      <xs:complexType name="JobOnWip">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:JobDetail">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="DepartmentCode" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="JobOnWip" nillable="true" type="tns:JobOnWip" />
+      <xs:complexType name="JobDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:JobBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ARRAY" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Customer" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemDescription" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemRevision" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="PCS" type="xs:long" />
+              <xs:element minOccurs="0" name="PNL" type="xs:decimal" />
+              <xs:element minOccurs="0" name="ReleaseDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="SQM" type="xs:decimal" />
+              <xs:element minOccurs="0" name="ShipTo" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="JobDetail" nillable="true" type="tns:JobDetail" />
+      <xs:complexType name="JobTag">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:Job">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Layup" nillable="true" type="tns:LayupCollection" />
+              <xs:element minOccurs="0" name="Routing" nillable="true" type="tns:CommonCodeCollection" />
+              <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q8:ArrayOfKeyValueOfstringstring" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="JobTag" nillable="true" type="tns:JobTag" />
+      <xs:complexType name="Job">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:JobBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Array4Pnl" type="xs:int" />
+              <xs:element minOccurs="0" name="CardNo" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Date" nillable="true" type="tns:JobDate" />
+              <xs:element minOccurs="0" name="DateCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemDescription" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ItemId" type="xs:decimal" />
+              <xs:element minOccurs="0" name="ItemRevision" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="ParentJob" nillable="true" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Pcs4Array" type="xs:int" />
+              <xs:element minOccurs="0" name="Pcs4Pnl" type="xs:int" />
+              <xs:element minOccurs="0" name="PrimaryJob" nillable="true" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Quantities" nillable="true" type="tns:QuantityGradeCollection" />
+              <xs:element minOccurs="0" name="ShipTo" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Job" nillable="true" type="tns:Job" />
+      <xs:complexType name="JobDate">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" base="q9:ModelBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ExpiryDate" nillable="true" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="Id" type="xs:decimal" />
+              <xs:element minOccurs="0" name="ManufacturedDate" nillable="true" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="ManufacturedDateType" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="JobDate" nillable="true" type="tns:JobDate" />
+      <xs:complexType name="QuantityGradeCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="QuantityGrade" nillable="true" type="tns:QuantityGrade" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="QuantityGradeCollection" nillable="true" type="tns:QuantityGradeCollection" />
+      <xs:complexType name="LayupCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Layup" nillable="true" type="tns:Layup" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="LayupCollection" nillable="true" type="tns:LayupCollection" />
+      <xs:complexType name="Layup">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:CommonCode">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+              <xs:element minOccurs="0" name="ScaleX" type="xs:decimal" />
+              <xs:element minOccurs="0" name="ScaleY" type="xs:decimal" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Layup" nillable="true" type="tns:Layup" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Simmtech.BusinessModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ModelBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Action" type="tns:ModelTransactionType" />
+          <xs:element minOccurs="0" name="HandleId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ModelBase" nillable="true" type="tns:ModelBase" />
+      <xs:simpleType name="ModelTransactionType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Select" />
+          <xs:enumeration value="Update" />
+          <xs:enumeration value="Insert" />
+          <xs:enumeration value="Delete" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ModelTransactionType" nillable="true" type="tns:ModelTransactionType" />
+      <xs:simpleType name="InventoryStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="All" />
+          <xs:enumeration value="Normal" />
+          <xs:enumeration value="Hold" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="InventoryStatus" nillable="true" type="tns:InventoryStatus" />
+    </xs:schema>
+    <xs:schema xmlns:tns="Simmtech.User" elementFormDefault="qualified" targetNamespace="Simmtech.User" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="Simmtech.BusinessModel" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="UserProfile">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:UserBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="SelectedOrganization" nillable="true" type="tns:Oraganization" />
+              <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="UserProfile" nillable="true" type="tns:UserProfile" />
+      <xs:complexType name="UserBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:long" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
+          <xs:element xmlns:q1="Simmtech.BusinessModel" minOccurs="0" name="Type" type="q1:UserType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserBase" nillable="true" type="tns:UserBase" />
+      <xs:complexType name="MembershipUser">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:UserBase">
+            <xs:sequence>
+              <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Properties" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+              <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Roles" nillable="true" type="q3:ArrayOfstring" />
+              <xs:element minOccurs="0" name="Validate" nillable="true" type="tns:UserValidation" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="MembershipUser" nillable="true" type="tns:MembershipUser" />
+      <xs:complexType name="UserValidation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Expired" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IsLocked" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsModified" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PasswordExpired" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserValidation" nillable="true" type="tns:UserValidation" />
+      <xs:complexType name="Oraganization">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:Organization">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Oraganization" nillable="true" type="tns:Oraganization" />
+      <xs:complexType name="Organization">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="OperatingUnitId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Organization" nillable="true" type="tns:Organization" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfKeyValueOfstringstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Key" nillable="true" type="xs:string" />
+                <xs:element name="Value" nillable="true" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IMobilePackingController_GetPacking_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPacking" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetPacking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetPackedListDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPackedListDetail" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetPackedListDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPackedListDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetPackedJobDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPackedJobDetail" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetPackedJobDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPackedJobDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_ApprovePackedList_InputMessage">
+    <wsdl:part name="parameters" element="tns:ApprovePackedList" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_ApprovePackedList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ApprovePackedListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_MoveInventory_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoveInventory" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_MoveInventory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoveInventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetInventory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInventory" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetInventory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_TransferOrgInventory_InputMessage">
+    <wsdl:part name="parameters" element="tns:TransferOrgInventory" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_TransferOrgInventory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransferOrgInventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_ValidateOnHandPacking_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateOnHandPacking" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_ValidateOnHandPacking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateOnHandPackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetInventoryPackingList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInventoryPackingList" />
+  </wsdl:message>
+  <wsdl:message name="IMobilePackingController_GetInventoryPackingList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInventoryPackingListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetShipment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShipment" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetShipment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetShipmentPacking_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShipmentPacking" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetShipmentPacking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShipmentPackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetShipmentIdForName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShipmentIdForName" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetShipmentIdForName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShipmentIdForNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetJobWithShipment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobWithShipment" />
+  </wsdl:message>
+  <wsdl:message name="IMobileShipmentController_GetJobWithShipment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobWithShipmentResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMobilePackingController">
+    <wsdl:operation name="GetPacking">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetPacking" message="tns:IMobilePackingController_GetPacking_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetPackingResponse" message="tns:IMobilePackingController_GetPacking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPackedListDetail">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetPackedListDetail" message="tns:IMobilePackingController_GetPackedListDetail_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetPackedListDetailResponse" message="tns:IMobilePackingController_GetPackedListDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPackedJobDetail">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetPackedJobDetail" message="tns:IMobilePackingController_GetPackedJobDetail_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetPackedJobDetailResponse" message="tns:IMobilePackingController_GetPackedJobDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ApprovePackedList">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/ApprovePackedList" message="tns:IMobilePackingController_ApprovePackedList_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/ApprovePackedListResponse" message="tns:IMobilePackingController_ApprovePackedList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveInventory">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/MoveInventory" message="tns:IMobilePackingController_MoveInventory_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/MoveInventoryResponse" message="tns:IMobilePackingController_MoveInventory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInventory">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetInventory" message="tns:IMobilePackingController_GetInventory_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetInventoryResponse" message="tns:IMobilePackingController_GetInventory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferOrgInventory">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/TransferOrgInventory" message="tns:IMobilePackingController_TransferOrgInventory_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/TransferOrgInventoryResponse" message="tns:IMobilePackingController_TransferOrgInventory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateOnHandPacking">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/ValidateOnHandPacking" message="tns:IMobilePackingController_ValidateOnHandPacking_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/ValidateOnHandPackingResponse" message="tns:IMobilePackingController_ValidateOnHandPacking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInventoryPackingList">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetInventoryPackingList" message="tns:IMobilePackingController_GetInventoryPackingList_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobilePackingController/GetInventoryPackingListResponse" message="tns:IMobilePackingController_GetInventoryPackingList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IMobileShipmentController">
+    <wsdl:operation name="GetShipment">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetShipment" message="tns:IMobileShipmentController_GetShipment_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetShipmentResponse" message="tns:IMobileShipmentController_GetShipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShipmentPacking">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetShipmentPacking" message="tns:IMobileShipmentController_GetShipmentPacking_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetShipmentPackingResponse" message="tns:IMobileShipmentController_GetShipmentPacking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShipmentIdForName">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetShipmentIdForName" message="tns:IMobileShipmentController_GetShipmentIdForName_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetShipmentIdForNameResponse" message="tns:IMobileShipmentController_GetShipmentIdForName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobWithShipment">
+      <wsdl:input wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetJobWithShipment" message="tns:IMobileShipmentController_GetJobWithShipment_InputMessage" />
+      <wsdl:output wsaw:Action="Simmtech.BusinessService/IMobileShipmentController/GetJobWithShipmentResponse" message="tns:IMobileShipmentController_GetJobWithShipment_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMobilePackingController" type="tns:IMobilePackingController">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPacking">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/GetPacking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackedListDetail">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/GetPackedListDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackedJobDetail">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/GetPackedJobDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApprovePackedList">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/ApprovePackedList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveInventory">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/MoveInventory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventory">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/GetInventory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferOrgInventory">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/TransferOrgInventory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateOnHandPacking">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/ValidateOnHandPacking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventoryPackingList">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobilePackingController/GetInventoryPackingList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IMobileShipmentController" type="tns:IMobileShipmentController">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShipment">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobileShipmentController/GetShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShipmentPacking">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobileShipmentController/GetShipmentPacking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShipmentIdForName">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobileShipmentController/GetShipmentIdForName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobWithShipment">
+      <soap:operation soapAction="Simmtech.BusinessService/IMobileShipmentController/GetJobWithShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MobileControllerHost">
+    <wsdl:port name="BasicHttpBinding_IMobilePackingController" binding="tns:BasicHttpBinding_IMobilePackingController">
+      <soap:address location="http://localhost:8618/Simmtech/BusinessService/MobileController/MobilePackingController" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IMobileShipmentController" binding="tns:BasicHttpBinding_IMobileShipmentController">
+      <soap:address location="http://localhost:8618/Simmtech/BusinessService/MobileController/MobileShipmentController" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
