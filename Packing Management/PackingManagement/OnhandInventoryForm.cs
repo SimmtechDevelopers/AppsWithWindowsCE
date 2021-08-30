@@ -24,7 +24,7 @@ namespace PackingManagement
         public OnhandInventoryForm()
         {
             InitializeComponent();
-            this.MobilePacking.Url = "http://stkgate.simmtech.co.kr:8618/Simmtech/BusinessService/MobileController/MobilePackingController";
+            this.MobilePacking.Url = "http://stgate.simmtech.com:8618/Simmtech/BusinessService/MobileController/MobilePackingController";
             
             this.PackingListScanTimer.Tick += new EventHandler(PackingListScanTimer_Tick);
             this.PackingListScanTimer.Interval = 500;

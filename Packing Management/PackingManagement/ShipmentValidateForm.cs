@@ -27,7 +27,7 @@ namespace PackingManagement
             InitializeComponent();
             
             //this.MobileShipment.Url = "http://10.101.103.21:8618/Simmtech/BusinessService/MobileController/MobileShipmentController";
-            this.MobileShipment.Url = "http://stkgate.simmtech.co.kr:8618/Simmtech/BusinessService/MobileController/MobileShipmentController";
+            this.MobileShipment.Url = "http://stgate.simmtech.com:8618/Simmtech/BusinessService/MobileController/MobileShipmentController";
 
             this.scannerTimer.Tick += new EventHandler(BarcodeScanned);
             this.scannerTimer.Interval = 300;

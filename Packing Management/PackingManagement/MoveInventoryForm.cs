@@ -32,7 +32,7 @@ namespace PackingManagement
 #endif
 
             //this.MobilePacking.Url = "http://10.101.103.21:8618/Simmtech/BusinessService/MobileController/MobilePackingController";
-            this.MobilePacking.Url = "http://stkgate.simmtech.co.kr:8618/Simmtech/BusinessService/MobileController/MobilePackingController";
+            this.MobilePacking.Url = "http://stgate.simmtech.com:8618/Simmtech/BusinessService/MobileController/MobilePackingController";
         }
 
         public MoveInventoryForm(UserProfile user, string[] roles)

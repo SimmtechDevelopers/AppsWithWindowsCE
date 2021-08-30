@@ -22,8 +22,11 @@ namespace PackingManagement
         {
             InitializeComponent();
 
-            this.membership.Url = "http://stkgate.simmtech.co.kr:8519/Simmtech/User/Membership";
-            this.role.Url = "http://stkgate.simmtech.co.kr:8519/Simmtech/User/Role";
+            //this.membership.Url = "http://stkgate.simmtech.co.kr:8519/Simmtech/User/Membership";
+            //this.role.Url = "http://stkgate.simmtech.co.kr:8519/Simmtech/User/Role";
+
+            this.membership.Url = "http://stgate.simmtech.com:8519/Simmtech/User/Membership";
+            this.role.Url = "http://stgate.simmtech.com:8519/Simmtech/User/Role";
 
             this.comboBoxOrganization.DataSource = membership.GetOrganizations();
             this.comboBoxOrganization.DisplayMember = "Description";
