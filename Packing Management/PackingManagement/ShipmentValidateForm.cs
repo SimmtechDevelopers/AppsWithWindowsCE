@@ -45,7 +45,8 @@ namespace PackingManagement
                 this.User = user;
                 this.Roles = roles;
 
-                if (!(this.Roles.Contains("STC INV/PACKING MANAGER") || this.Roles.Contains("STX INV/PACKING MANAGER") || this.Roles.Contains("STC INV/PACKING SUPER USER") || this.Roles.Contains("OSC Product Member"))) throw new Exception("User has no responsibility.");
+                //if (!(this.Roles.Contains("STC INV/PACKING MANAGER") || this.Roles.Contains("STX INV/PACKING MANAGER") || this.Roles.Contains("STC INV/PACKING SUPER USER") || this.Roles.Contains("OSC Product Member"))) throw new Exception("User has no responsibility.");
+                if (!(this.Roles.Contains(this.User.SelectedOrganization.ToString() + " INV/PACKING MANAGER") || this.Roles.Contains("STX INV/PACKING MANAGER") || this.Roles.Contains("STC INV/PACKING SUPER USER") || this.Roles.Contains("OSC Product Member"))) throw new Exception("User has no responsibility.");
 
             }
             catch (Exception ex)
